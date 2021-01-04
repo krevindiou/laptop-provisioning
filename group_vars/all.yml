@@ -6,7 +6,6 @@ brave_extensions_urls:
   - https://chrome.google.com/webstore/detail/https-everywhere/gcbommkclmclpchllfjekcdonpmejbdp
   - https://chrome.google.com/webstore/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk
   - https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
-  - https://chrome.google.com/webstore/detail/cookie-autodelete/fhcgjolkccmbidfldomjliifgaodjagh
 chromium_extensions_urls:
   - https://chrome.google.com/webstore/detail/duckduckgo-privacy-essent/bkdgflcldnnnapblkhphbgpggdiikppg
   - https://chrome.google.com/webstore/detail/privacy-badger/pkehgijcmpdhfbdbbnkijodmdjhbjlgp
@@ -15,7 +14,6 @@ chromium_extensions_urls:
   - https://chrome.google.com/webstore/detail/https-everywhere/gcbommkclmclpchllfjekcdonpmejbdp
   - https://chrome.google.com/webstore/detail/clearurls/lckanjgmijmafbedllaakclkaicjfmnk
   - https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
-  - https://chrome.google.com/webstore/detail/cookie-autodelete/fhcgjolkccmbidfldomjliifgaodjagh
 firefox_extensions_urls:
   - https://addons.mozilla.org/en-US/firefox/addon/duckduckgo-for-firefox
   - https://addons.mozilla.org/en-US/firefox/addon/privacy-badger17
@@ -24,4 +22,3 @@ firefox_extensions_urls:
   - https://addons.mozilla.org/en-US/firefox/addon/https-everywhere
   - https://addons.mozilla.org/en-US/firefox/addon/clearurls
   - https://addons.mozilla.org/en-US/firefox/addon/ublock-origin
-  - https://addons.mozilla.org/en-US/firefox/addon/cookie-autodelete
