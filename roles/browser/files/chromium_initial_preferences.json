@@ -1,0 +1,87 @@
+{
+    "alternate_error_pages": {
+        "enabled": false
+    },
+    "autofill": {
+        "enabled": false
+    },
+    "background_mode": {
+        "enabled": false
+    },
+    "bookmark_bar": {
+        "show_on_all_tabs": true
+    },
+    "browser": {
+        "has_seen_welcome_page": true,
+        "check_default_browser": false,
+        "show_home_button": false,
+        "clear_data": {
+            "browsing_history": true,
+            "cache": true,
+            "download_history": true,
+            "form_data": true,
+            "hosted_apps_data": true,
+            "passwords": true
+        },
+        "clear_lso_data_enabled": true,
+        "enable_spellchecking": false
+    },
+    "credentials_enable_autosignin": false,
+    "distribution": {
+        "import_bookmarks": false,
+        "make_chrome_default": false,
+        "make_chrome_default_for_user": false,
+        "verbose_logging": false,
+        "skip_first_run_ui": true,
+        "suppress_first_run_default_browser_prompt": true,
+        "suppress_first_run_bubble": true,
+        "show_welcome_page": false
+    },
+    "dns_prefetching": {
+        "enabled": false
+    },
+    "download": {
+        "prompt_for_download": true
+    },
+    "enable_do_not_track": true,
+    "extensions": {
+        "ui": {
+            "developer_mode": true
+        }
+    },
+    "first_run_tabs": [],
+    "hardware": {
+        "audio_capture_enabled": false
+    },
+    "hide_web_store_icon": true,
+    "homepage_is_newtabpage": true,
+    "net": {
+        "network_prediction_options": 2
+    },
+    "payments": {
+        "can_make_payment_enabled": false
+    },
+    "profile": {
+        "password_manager_enabled": false,
+        "cookie_controls_mode": 1,
+        "default_content_setting_values": {
+            "cookies": 4
+        }
+    },
+    "safebrowsing": {
+        "enabled": false
+    },
+    "search": {
+        "suggest_enabled": false
+    },
+    "signin": {
+        "allowed": false,
+        "allowed_on_next_startup": false
+    },
+    "sync": {
+        "suppress_start": true
+    },
+    "translate": {
+        "enabled": false
+    }
+}

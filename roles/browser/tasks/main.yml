@@ -1,0 +1,13 @@
+- import_tasks: brave.yml
+- import_tasks: chromium.yml
+- import_tasks: firefox.yml
+- name: Set default browser
+  block:
+    - name: Set default browser using xdg-settings
+      command: xdg-settings set default-web-browser firefox.desktop
+
+    - name: Set default browser for Xfce Preferred Applications framework
+      lineinfile:
+        path: ~/.config/xfce4/helpers.rc
+        regexp: ^WebBrowser=
+        line: WebBrowser=firefox

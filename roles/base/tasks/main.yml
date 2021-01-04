@@ -1,0 +1,136 @@
+- name: Remove microsoft-office-web-jak package
+  become: yes
+  pacman:
+    name: microsoft-office-web-jak
+    state: absent
+
+- name: Install packages
+  become: yes
+  pacman:
+    name:
+      - base-devel
+      - curl
+      - git
+      - ca-certificates
+      - gnupg
+      - avahi
+      - yay
+      - cups
+      - tlp
+      - tlp-rdw
+      - powertop
+      - ruby # Needed for vagrant to prevent dependency cycle
+      - redshift
+      - bleachbit
+      - cheese
+      - python-lxml # Needed for Ansible xml module
+      - geary
+    state: latest
+
+- name: Configure default editor
+  become: yes
+  lineinfile:
+    path: /etc/environment
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  with_items:
+    - { regexp: '^VISUAL=', line: 'VISUAL=vim' }
+    - { regexp: '^EDITOR=', line: 'EDITOR=vim' }
+
+- name: Set default mail reader
+  lineinfile:
+    path: ~/.config/xfce4/helpers.rc
+    regexp: ^MailReader=
+    line: MailReader=geary
+
+- name: Configure locales
+  block:
+    - name: Install fr_FR.UTF-8 locale
+      become: yes
+      locale_gen:
+        name: fr_FR.UTF-8
+        state: present
+
+    - name: Configure locale
+      become: yes
+      lineinfile:
+        path: /etc/locale.conf
+        regexp: '{{ item.regexp }}'
+        line: '{{ item.line }}'
+      with_items:
+        - { regexp: '^LC_ALL=', line: 'LC_ALL=en_US.UTF-8' }
+        - { regexp: '^LC_ADDRESS=', line: 'LC_ADDRESS=fr_FR.UTF-8' }
+        - { regexp: '^LC_IDENTIFICATION=', line: 'LC_IDENTIFICATION=fr_FR.UTF-8' }
+        - { regexp: '^LC_MEASUREMENT=', line: 'LC_MEASUREMENT=fr_FR.UTF-8' }
+        - { regexp: '^LC_MONETARY=', line: 'LC_MONETARY=fr_FR.UTF-8' }
+        - { regexp: '^LC_NAME=', line: 'LC_NAME=fr_FR.UTF-8' }
+        - { regexp: '^LC_NUMERIC=', line: 'LC_NUMERIC=fr_FR.UTF-8' }
+        - { regexp: '^LC_PAPER=', line: 'LC_PAPER=fr_FR.UTF-8' }
+        - { regexp: '^LC_TELEPHONE=', line: 'LC_TELEPHONE=fr_FR.UTF-8' }
+        - { regexp: '^LC_TIME=', line: 'LC_TIME=fr_FR.UTF-8' }
+
+- name: Configure whisker menu
+  lineinfile:
+    path: ~/.config/xfce4/panel/whiskermenu-8.rc
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  with_items:
+    - { regexp: '^position-categories-alternate=', line: 'position-categories-alternate=true' }
+
+- name: Configure shortcuts
+  command: "xfconf-query --create --channel xfce4-keyboard-shortcuts --property '{{ item.name }}' --type {{ item.type }} --set '{{ item.value }}'"
+  with_items:
+    - { name: '/xfwm4/custom/<Super>Up', type: 'string', value: 'tile_up_key' }
+    - { name: '/xfwm4/custom/<Super>Right', type: 'string', value: 'tile_right_key' }
+    - { name: '/xfwm4/custom/<Super>Down', type: 'string', value: 'tile_down_key' }
+    - { name: '/xfwm4/custom/<Super>Left', type: 'string', value: 'tile_left_key' }
+    - { name: '/xfwm4/custom/<Super>d', type: 'string', value: 'show_desktop_key' }
+    - { name: '/commands/custom/<Super>e', type: 'string', value: 'exo-open --launch FileManager' }
+    - { name: '/commands/custom/<Super>t', type: 'string', value: 'exo-open --launch TerminalEmulator' }
+
+- name: Configure panel
+  command: "xfconf-query --create --channel xfce4-panel --property '{{ item.name }}' --type {{ item.type }} --set '{{ item.value }}'"
+  with_items:
+    - { name: '/plugins/plugin-3/grouping', type: 'uint', value: '0' }
+    - { name: '/panels/panel-0/dark-mode', type: 'bool', value: 'true' }
+
+- name: Configure notifyd
+  command: "xfconf-query --create --channel xfce4-notifyd --property '{{ item.name }}' --type {{ item.type }} --set '{{ item.value }}'"
+  with_items:
+    - { name: '/expire-timeout', type: 'int', value: '3' }
+
+- name: Configure power manager
+  command: "xfconf-query --create --channel xfce4-power-manager --property '{{ item.name }}' --type {{ item.type }} --set '{{ item.value }}'"
+  with_items:
+    - { name: '/xfce4-power-manager/show-tray-icon', type: 'bool', value: 'true' }
+    - { name: '/xfce4-power-manager/general-notification', type: 'bool', value: 'true' }
+
+- name: Configure desktop icons
+  command: "xfconf-query --create --channel xfce4-desktop --property '{{ item.name }}' --type {{ item.type }} --set '{{ item.value }}'"
+  with_items:
+    - { name: '/desktop-icons/file-icons/show-removable', type: 'bool', value: 'true' }
+    - { name: '/desktop-icons/file-icons/show-filesystem', type: 'bool', value: 'false' }
+    - { name: '/desktop-icons/file-icons/show-trash', type: 'bool', value: 'false' }
+    - { name: '/desktop-icons/file-icons/show-home', type: 'bool', value: 'false' }
+
+- name: Configure notifications
+  ini_file:
+    path: ~/.config/manjaro/manjaro-settings-manager.conf
+    section: notifications
+    option: '{{ item.option }}'
+    value: '{{ item.value }}'
+    state: present
+  with_items:
+    - { option: 'checkLanguagePackages', value: 'false' }
+    - { option: 'checkNewKernel', value: 'true' }
+    - { option: 'checkNewKernelLts', value: 'true' }
+    - { option: 'checkNewKernelRecommended', value: 'false' }
+    - { option: 'checkUnsupportedKernel', value: 'true' }
+    - { option: 'checkUnsupportedKernelRunning', value: 'true' }
+
+- name: Run and enable fstrim.timer
+  become: yes
+  service:
+    name: fstrim.timer
+    state: started
+    enabled: true

@@ -1,0 +1,10 @@
+- name: Check requirements
+  hosts: localhost
+  connection: local
+  pre_tasks:
+    - name: Checking Ansible version
+      assert:
+        that: "ansible_version.full is version_compare('2.9', '>=')"
+    - name: Checking OS distribution
+      assert:
+        that: "ansible_lsb.id == 'ManjaroLinux' and ansible_lsb.major_release is version_compare('20', '>=')"

@@ -1,0 +1,111 @@
+{
+    "alternate_error_pages": {
+        "enabled": false
+    },
+    "autofill": {
+        "enabled": false,
+        "credit_card_enabled": false,
+        "orphan_rows_removed": false,
+        "profile_enabled": false
+    },
+    "bookmark_bar": {
+        "show_on_all_tabs": true
+    },
+    "brave": {
+        "autocomplete_enabled": false,
+        "branded_wallpaper_notification_dismissed": true,
+        "brave_ads": {
+            "enabled": false,
+            "has_removed_first_launch_notification": true,
+            "should_show_first_launch_notification": false
+        },
+        "fb_embed_default": false,
+        "google_login_default": false,
+        "hangouts_enabled": false,
+        "hide_brave_rewards_button": true,
+        "new_tab_page": {
+            "show_addcard": false,
+            "show_background_image": false,
+            "show_binance": false,
+            "show_brave_today": false,
+            "show_gemini": false,
+            "show_branded_background_image": false,
+            "show_rewards": false,
+            "show_stats": false
+        },
+        "rewards": {
+            "enabled": false
+        },
+        "shields": {
+            "advanced_view_enabled": true
+        },
+        "top_site_suggestions_enabled": false,
+        "twitter_embed_default": false,
+        "wayback_machine_enabled": false,
+        "webtorrent_enabled": false
+    },
+    "browser": {
+        "has_seen_welcome_page": true,
+        "check_default_browser": false,
+        "show_home_button": false,
+        "clear_data": {
+            "browsing_history": true,
+            "cache": true,
+            "download_history": true,
+            "form_data": true,
+            "hosted_apps_data": true,
+            "passwords": true
+        },
+        "clear_lso_data_enabled": true,
+        "enable_spellchecking": false
+    },
+    "credentials_enable_autosignin": false,
+    "credentials_enable_service": false,
+    "crypto_dot_com": {
+        "new_tab_page": {
+            "show_crypto_dot_com": false
+        }
+    },
+    "dns_prefetching": {
+        "enabled": false
+    },
+    "enable_do_not_track": true,
+    "hardware": {
+        "audio_capture_enabled": false
+    },
+    "net": {
+        "network_prediction_options": 2
+    },
+    "payments": {
+        "can_make_payment_enabled": false
+    },
+    "previews": {
+        "litepage": {
+            "user-needs-notification": false
+        }
+    },
+    "profile": {
+        "password_manager_enabled": false,
+        "block_third_party_cookies": true,
+        "cookie_controls_mode": 1,
+        "default_content_setting_values": {
+            "cookies": 4
+        }
+    },
+    "safebrowsing": {
+        "enabled": false
+    },
+    "search": {
+        "suggest_enabled": false
+    },
+    "signin": {
+        "allowed": false,
+        "allowed_on_next_startup": false
+    },
+    "spellcheck": {
+        "use_spelling_service": false
+    },
+    "translate": {
+        "enabled": false
+    }
+}

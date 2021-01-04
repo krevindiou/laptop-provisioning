@@ -1,0 +1,11 @@
+- name: Install Steam
+  become: yes
+  pacman:
+    name: steam-manjaro
+    state: latest
+
+- name: Install VMware
+  command: 'yay -S --noconfirm --needed --cleanafter {{ item.package }}'
+  with_items:
+    - { package: 'vmware-workstation' }
+    - { package: 'open-vm-tools' }

@@ -1,0 +1,31 @@
+- name: Install packages
+  become: yes
+  pacman:
+    name:
+      - firefox
+    state: latest
+
+- name: Check if Firefox profile directory exists
+  stat:
+    path: ~/.mozilla
+  register: firefox_profile_directory
+
+- name: Create profile directory if not exist
+  command: firefox -Createprofile default
+  environment:
+    DISPLAY: ':0'
+  when: firefox_profile_directory.stat.exists == false
+
+- name: Find Firefox profile directory
+  command: find ~/.mozilla/firefox -name *.default
+  register: firefox_profile_directory
+
+- name: Create Firefox user.js file
+  copy:
+    src: files/firefox_user.js
+    dest: "{{ firefox_profile_directory.stdout }}/user.js"
+
+- name: Launch Firefox
+  shell: firefox {{ firefox_extensions_urls|join(' ') }} &>/dev/null &
+  environment:
+    DISPLAY: ':0'

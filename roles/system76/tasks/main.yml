@@ -1,0 +1,15 @@
+- name: Install packages
+  become: yes
+  pacman:
+    name:
+      - llvm
+      - llvm-libs
+    state: latest
+
+- name: Install System76 AUR packages
+  command: 'yay -S --noconfirm --needed --cleanafter {{ item.package }}'
+  with_items:
+    - { package: 'system76-power' }
+    - { package: 'system76-driver' }
+    - { package: 'firmware-manager' }
+    - { package: 'libs76-hidpi-widget-git' }

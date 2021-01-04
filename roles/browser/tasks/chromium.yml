@@ -1,0 +1,23 @@
+- name: Install packages
+  become: yes
+  pacman:
+    name:
+      - chromium
+    state: latest
+
+- name: Create Chromium initial_preferences.json file (version <= 87)
+  become: yes
+  copy:
+    src: files/chromium_initial_preferences.json
+    dest: /usr/lib/chromium/master_preferences
+
+- name: Create Chromium initial_preferences.json file
+  become: yes
+  copy:
+    src: files/chromium_initial_preferences.json
+    dest: /usr/lib/chromium/initial_preferences.json
+
+- name: Launch Chromium
+  shell: chromium {{ chromium_extensions_urls|join(' ') }} &>/dev/null &
+  environment:
+    DISPLAY: ':0'

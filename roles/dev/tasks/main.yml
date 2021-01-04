@@ -1,0 +1,152 @@
+- name: Remove vi package
+  become: yes
+  pacman:
+    name:
+      - vi
+      - vim
+    state: absent
+    extra_args: --cascade
+
+- name: Install packages
+  become: yes
+  pacman:
+    name:
+      - tig
+      - diff-so-fancy
+      - htop
+      - docker
+      - docker-compose
+      - neovim
+      - fd
+      - bat
+      - ripgrep
+      - tokei
+      - syncthing-gtk
+      - virtualbox
+      - vagrant
+      - meld
+      - jq
+      - signal-desktop
+      - filezilla
+      - bash
+      - util-linux
+    state: latest
+
+- name: Run and enable Docker
+  become: yes
+  service:
+    name: docker
+    state: started
+    enabled: true
+
+- name: Install AUR packages
+  command: 'yay -S --noconfirm --needed --cleanafter {{ item.package }}'
+  with_items:
+    - { package: 'visual-studio-code-bin' }
+    - { package: 'heroku-cli' }
+    - { package: 'trimage' }
+    - { package: 'protonvpn-linux-gui' }
+    - { package: 'protonmail-bridge-bin' }
+    - { package: 'usbimager' }
+    - { package: 'pgcli' }
+    - { package: 'dust' }
+    - { package: 'nerd-fonts-source-code-pro' }
+    - { package: 'neovim-symlinks' }
+
+- name: Install dotfiles
+  block:
+    - name: Get dotfiles repository
+      git:
+        repo: https://github.com/krevindiou/dotfiles.git
+        dest: ~/.dotfiles
+        depth: 1
+        force: yes
+
+    - name: Symlink dotfiles
+      file:
+        src: '~/.dotfiles/{{ item.filename }}'
+        dest: '~/{{ item.filename }}'
+        state: link
+      with_items:
+        - { filename: '.gitconfig' }
+        - { filename: '.gitignore_global' }
+        - { filename: '.inputrc' }
+        - { filename: '.my.cnf' }
+        - { filename: '.psqlrc' }
+        - { filename: '.vimrc' }
+
+    - name: Create neovim configuration directories
+      file:
+        path: '~/.config/nvim/{{ item.directory }}'
+        state: directory
+      with_items:
+        - { directory: 'autoload' }
+
+    - name: Symlink neovim configuration
+      file:
+        src: ~/.vimrc
+        dest: ~/.config/nvim/init.vim
+        state: link
+
+    - name: Download vim-plug
+      get_url:
+        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        dest: ~/.config/nvim/autoload
+
+    - name: Install neovim plugins
+      command: vim -c 'PlugInstall' -c 'x!' -c 'x!'
+
+- name: Install Bash-it
+  block:
+    - name: Get Bash-it repository
+      git:
+        repo: https://github.com/Bash-it/bash-it.git
+        dest: ~/.bash_it
+        depth: 1
+        force: yes
+
+    - name: Install Bash-it
+      shell: ~/.bash_it/install.sh --silent
+
+    - name: Configure Bash-it aliases
+      command: bash -i -c 'bash-it enable alias git vagrant'
+
+    - name: Configure Bash-it completion
+      command: bash -i -c 'bash-it enable completion docker docker-compose git makefile ssh vagrant'
+
+    - name: Configure Bash-it plugins
+      command: bash -i -c 'bash-it enable plugin man powerline'
+
+    - name: Change Bash-it theme
+      lineinfile:
+        path: ~/.bashrc
+        regexp: ^export BASH_IT_THEME=
+        line: export BASH_IT_THEME='powerline'
+
+- name: Update terminal configuration
+  block:
+    - name: Change terminal font
+      ini_file:
+        path: ~/.config/xfce4/terminal/terminalrc
+        section: Configuration
+        option: FontName
+        value: SauceCodePro Nerd Font Mono 10
+        state: present
+
+    - name: Remove transparent background
+      ini_file:
+        path: ~/.config/xfce4/terminal/terminalrc
+        section: Configuration
+        option: BackgroundMode
+        value: TERMINAL_BACKGROUND_TRANSPARENT
+        state: absent
+
+- name: Configure Visual Studio Code
+  command: 'code --install-extension {{ item }}'
+  with_items:
+    - ms-vscode-remote.remote-containers
+    - ms-azuretools.vscode-docker
+    - junstyle.php-cs-fixer
+    - ms-python.python
+    - nadim-vscode.symfony-code-snippets
+    - octref.vetur
