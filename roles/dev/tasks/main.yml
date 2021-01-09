@@ -145,7 +145,12 @@
   with_items:
     - ms-vscode-remote.remote-containers
     - ms-azuretools.vscode-docker
+    - bmewburn.vscode-intelephense-client
     - junstyle.php-cs-fixer
-    - ms-python.python
-    - nadim-vscode.symfony-code-snippets
+    - mblode.twig-language-2
     - octref.vetur
+    - dbaeumer.vscode-eslint
+    - mohsen1.prettify-json
+    - ms-python.python
+    - vscoss.vscode-ansible
+    - hashicorp.terraform
