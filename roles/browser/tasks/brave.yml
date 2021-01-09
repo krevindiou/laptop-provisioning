@@ -1,4 +1,4 @@
-- name: Install AUR packages
+- name: Install Brave
   command: 'yay -S --noconfirm --needed --cleanafter {{ item.package }}'
   with_items:
     - { package: 'brave-bin' }
