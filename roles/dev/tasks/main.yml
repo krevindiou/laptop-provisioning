@@ -43,7 +43,6 @@
   command: 'yay -S --noconfirm --needed --cleanafter {{ item.package }}'
   with_items:
     - { package: 'visual-studio-code-bin' }
-    - { package: 'heroku-cli' }
     - { package: 'trimage' }
     - { package: 'protonvpn-linux-gui' }
     - { package: 'protonmail-bridge-bin' }
