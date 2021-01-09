@@ -5,7 +5,7 @@
   gather_facts: no
   roles:
     - base
-    - system76
+    - { role: system76, when: ansible_system_vendor == 'System76' }
     - dev
     - browser
     - fun
