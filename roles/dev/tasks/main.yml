@@ -156,3 +156,4 @@
     - vscoss.vscode-ansible
     - hashicorp.terraform
     - bbenoist.vagrant
+    - pkief.material-icon-theme
