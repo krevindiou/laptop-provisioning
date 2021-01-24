@@ -157,3 +157,4 @@
     - hashicorp.terraform
     - bbenoist.vagrant
     - pkief.material-icon-theme
+    - bibhasdn.unique-lines
