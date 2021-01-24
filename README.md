@@ -4,7 +4,7 @@ Provision my System76 computer running Manjaro with Ansible
 
 ## Installation
 - Install Ansible
-- Execute `ansible-playbook playbook.yml`
+- Execute `ansible-playbook --ask-become-pass playbook.yml`
 
 ## Sandbox
 - Install Vagrant
