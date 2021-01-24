@@ -14,8 +14,6 @@
       - tig
       - diff-so-fancy
       - htop
-      - docker
-      - docker-compose
       - neovim
       - fd
       - bat
@@ -32,13 +30,6 @@
       - util-linux
     state: latest
 
-- name: Run and enable Docker
-  become: yes
-  service:
-    name: docker
-    state: started
-    enabled: true
-
 - name: Install AUR packages
   command: 'yay -S --noconfirm --needed --cleanafter {{ item.package }}'
   with_items:
@@ -52,6 +43,26 @@
     - { package: 'nerd-fonts-source-code-pro' }
     - { package: 'neovim-symlinks' }
     - { package: 'warpinator' }
+
+- name: Install Docker
+  block:
+    - name: Install Docker
+      become: yes
+      pacman:
+        name:
+          - docker
+          - docker-compose
+
+    - name: Fix Docker permissions
+      become: yes
+      command: usermod -aG docker ${USER}
+
+    - name: Run and enable Docker
+      become: yes
+      service:
+        name: docker
+        state: started
+        enabled: true
 
 - name: Install dotfiles
   block:
