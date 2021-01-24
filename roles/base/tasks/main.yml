@@ -25,6 +25,7 @@
       - cheese
       - python-lxml # Needed for Ansible xml module
       - geary
+      - libreoffice
     state: latest
 
 - name: Configure default editor
