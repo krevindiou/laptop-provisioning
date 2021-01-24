@@ -51,6 +51,7 @@
     - { package: 'dust' }
     - { package: 'nerd-fonts-source-code-pro' }
     - { package: 'neovim-symlinks' }
+    - { package: 'warpinator' }
 
 - name: Install dotfiles
   block:
