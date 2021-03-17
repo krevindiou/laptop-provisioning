@@ -168,3 +168,4 @@
     - bbenoist.vagrant
     - pkief.material-icon-theme
     - bibhasdn.unique-lines
+    - felixfbecker.php-debug
