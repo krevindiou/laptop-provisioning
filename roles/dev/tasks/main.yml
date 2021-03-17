@@ -43,6 +43,8 @@
     - { package: 'nerd-fonts-source-code-pro' }
     - { package: 'neovim-symlinks' }
     - { package: 'warpinator' }
+    - { package: 'notion-app' }
+    - { package: 'notion-enhancer' }
 
 - name: Install Docker
   block:
