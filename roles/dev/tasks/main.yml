@@ -164,7 +164,6 @@
     - dbaeumer.vscode-eslint
     - mohsen1.prettify-json
     - ms-python.python
-    - vscoss.vscode-ansible
     - hashicorp.terraform
     - bbenoist.vagrant
     - pkief.material-icon-theme
