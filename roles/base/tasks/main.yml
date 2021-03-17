@@ -114,6 +114,7 @@
     section: notifications
     option: '{{ item.option }}'
     value: '{{ item.value }}'
+    no_extra_spaces: yes
     state: present
   with_items:
     - { option: 'checkLanguagePackages', value: 'false' }

@@ -147,6 +147,7 @@
         section: Configuration
         option: FontName
         value: SauceCodePro Nerd Font Mono 10
+        no_extra_spaces: yes
         state: present
 
     - name: Remove transparent background
@@ -163,6 +164,7 @@
         section: Configuration
         option: '{{ item.option }}'
         value: '{{ item.value }}'
+        no_extra_spaces: yes
         state: present
       with_items:
         - { option: 'RunCustomCommand', value: 'TRUE' }
