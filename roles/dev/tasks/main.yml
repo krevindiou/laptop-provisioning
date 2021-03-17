@@ -21,6 +21,7 @@
       - tokei
       - syncthing-gtk
       - virtualbox
+      - linux-lts-virtualbox-host-modules
       - vagrant
       - meld
       - jq
