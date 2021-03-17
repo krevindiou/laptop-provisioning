@@ -24,7 +24,6 @@
       - bleachbit
       - cheese
       - python-lxml # Needed for Ansible xml module
-      - geary
       - libreoffice
       - restic
     state: latest
@@ -38,12 +37,6 @@
   with_items:
     - { regexp: '^VISUAL=', line: 'VISUAL=vim' }
     - { regexp: '^EDITOR=', line: 'EDITOR=vim' }
-
-- name: Set default mail reader
-  lineinfile:
-    path: ~/.config/xfce4/helpers.rc
-    regexp: ^MailReader=
-    line: MailReader=geary
 
 - name: Configure locales
   block:
