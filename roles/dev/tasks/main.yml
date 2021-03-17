@@ -29,6 +29,7 @@
       - filezilla
       - bash
       - util-linux
+      - tmux
     state: latest
 
 - name: Install AUR packages
@@ -46,6 +47,7 @@
     - { package: 'warpinator' }
     - { package: 'notion-app' }
     - { package: 'notion-enhancer' }
+    - { package: 'tmuxinator' }
 
 - name: Install Docker
   block:
@@ -154,6 +156,17 @@
         option: BackgroundMode
         value: TERMINAL_BACKGROUND_TRANSPARENT
         state: absent
+
+    - name: Set custom command
+      ini_file:
+        path: ~/.config/xfce4/terminal/terminalrc
+        section: Configuration
+        option: '{{ item.option }}'
+        value: '{{ item.value }}'
+        state: present
+      with_items:
+        - { option: 'RunCustomCommand', value: 'TRUE' }
+        - { option: 'CustomCommand', value: '/usr/bin/tmux' }
 
 - name: Configure Visual Studio Code
   command: 'code --install-extension {{ item }}'
