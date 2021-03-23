@@ -89,6 +89,7 @@
         - { filename: '.inputrc' }
         - { filename: '.my.cnf' }
         - { filename: '.psqlrc' }
+        - { filename: '.tmux.conf' }
         - { filename: '.vimrc' }
 
     - name: Create neovim configuration directories
